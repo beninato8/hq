@@ -5,7 +5,10 @@ import pprint
 import json
 from unidecode import unidecode
 import config
+<<<<<<< HEAD
 import pyscreenshot
+=======
+>>>>>>> 94a7141003b1cb665a47145682beb2523b63fe13
 
 class MyPrettyPrinter(pprint.PrettyPrinter):
     def format(self, object, context, maxlevels, level):
@@ -49,8 +52,11 @@ def countL(text, words):
         num += text.count(word)
     return num
 
+<<<<<<< HEAD
 screenshot = pyscreenshot.grab(bbox=(844,120,1264,535))
 screenshot.save('hq.png')
+=======
+>>>>>>> 94a7141003b1cb665a47145682beb2523b63fe13
 text = pytesseract.image_to_string(Image.open('hq.png'))
 print(unidecode(text) + '\n')
 answers = unidecode(text[text.index('?')+1:])
@@ -60,6 +66,7 @@ a_list = answers.split('\n')
 a_list = [x.replace("\"", "") for x in a_list if x not in ('\n', '', '\'', '\"','  ')]
 
 manual = False
+<<<<<<< HEAD
 # manual = True
 if manual:
     question = 'Which living organism has more teeth?'
@@ -67,6 +74,15 @@ if manual:
 
 cse = config.cse
 api = config.api
+=======
+#manual = True
+if manual:
+    question = 'CRISPR is a tool geneticists use to do what?'
+    a_list = ['Overcook chicken', 'Edit human genes', 'Store lettuce']
+
+cse = config.cse
+api = config.api_personal_2
+>>>>>>> 94a7141003b1cb665a47145682beb2523b63fe13
 
 print(question)
 print('\n' + str(a_list) + '\n')
@@ -97,6 +113,7 @@ for answer in a_list:
     hits = a_results[k[0]]
     title = a_results[k[1]]
     body = a_results[k[2]]
+<<<<<<< HEAD
     score = (max(1, int(hits)))/10 + 120*(max(1, (6*int(title))) * (max(1, 4*int(body))))/100
     for key in k:
         print(key + ': ' + str(a_results[key]) + '    ', end="")
@@ -110,3 +127,17 @@ for k, v in num.items():
 
 biggest = keywithmaxval(a_score)
 print('\n' + biggest)
+=======
+    score = (max(1, int(hits)))/10 * (3*max(1, (int(title))) * (2*max(1, int(body)))/100)
+    for key in k:
+        print(key + ': ' + str(a_results[key]))
+    print(a_results['Title Text'][0:2])
+    print(a_results['Body Text'])
+    a_score[answer] = score
+
+for key in a_score:
+    print(key + ': ' + str(a_score[key]))
+biggest = keywithmaxval(a_score)
+for i in range(20):
+    print(biggest)
+>>>>>>> 94a7141003b1cb665a47145682beb2523b63fe13
